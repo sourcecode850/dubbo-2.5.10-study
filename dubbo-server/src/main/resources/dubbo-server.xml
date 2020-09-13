@@ -13,7 +13,7 @@
     <dubbo:registry address="zookeeper://192.168.1.130:2181" client="zkclient"/>
 
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="dubbo" port="20880" dispatcher=""/>
 
     <!-- 将该接口暴露到dubbo中 -->
     <dubbo:service interface="com.source.AService" ref="aService"/>

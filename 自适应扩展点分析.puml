@@ -1,0 +1,17 @@
+@startuml
+actor ReferenceConfig
+ReferenceConfig -> ExtensionLoader: getExtensionLoader(Protocol.class).getAdaptiveExtension()
+ExtensionLoader -> ExtensionLoader: getExtensionLoader(Class<T> type)
+ExtensionLoader -> ExtensionLoader: getAdaptiveExtension()
+ExtensionLoader -> ExtensionLoader: createAdaptiveExtension()
+ExtensionLoader -> ExtensionLoader: getAdaptiveExtensionClass()
+ExtensionLoader -> ExtensionLoader: getExtensionClasses()
+ExtensionLoader -> ExtensionLoader: loadExtensionClasses()
+note left: 这里会去加载扩展点类META-INF/services/，\nMETA-INF/dubbo/，META-INF/dubbo/internal/
+ExtensionLoader -> ExtensionLoader: createAdaptiveExtensionClass()
+ExtensionLoader -> AdaptiveExtensionClass: newInstance()
+ExtensionLoader <- AdaptiveExtensionClass: instance
+ExtensionLoader -> ExtensionLoader: injectExtension
+ExtensionLoader -> ReferenceConfig: adaptiveExtensionClassInstance
+
+@enduml

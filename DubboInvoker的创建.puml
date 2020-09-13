@@ -1,0 +1,17 @@
+@startuml
+RegistryDirectory -> RegistryDirectory: refreshInvoker()
+RegistryDirectory -> RegistryDirectory: toInvokers()
+RegistryDirectory -> InvokerDelegate: new InvokerDelegate<T>(protocol.refer(..))
+ProtocolListenerWrapper -> ProtocolFilterWrapper: refer(Class<T> type, URL url)
+ProtocolListenerWrapper -> ListenerInvokerWrapper: new ListenerInvokerWrapper()
+ProtocolFilterWrapper -> DubboProtocol: refer()
+note left
+这里的ProtocolFilterWrapper中
+最内层Protocol应该不是简单的DubboProtocol
+而是Protocol$Adaptive
+上层包装的是下层，所以ProtocolListenerWrapper中的protocol
+是ProtocolFilterWrapper类型的
+end note
+DubboProtocol -> DubboInvoker: new DubboInvoker<T>(..)
+
+@enduml
